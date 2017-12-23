@@ -201,7 +201,6 @@ class DimensionalityReduction {
 		final int radius = 4;
 		gc.setFill(Color.BLUE);
 		for(int i = 0; i < N; i++) {
-			gc.setFill(Color.rgb(0, 255 - (i*255)/N, (i*255)/N));
 			final double x = data[i].get(0);
 			final double y = data[i].get(1);
 			final int x_fix = (int)(WIDTH*(0.10 + 0.80*(x - minX)/(maxX - minX)));
