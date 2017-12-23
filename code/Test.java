@@ -21,6 +21,6 @@ public class Test extends Application {
 			for(int j = 2; j < D; j++)
 				data[i].set(j, rnd.nextDouble());
 		}
-		DimensionalityReduction.isomap(data);
+		DimensionalityReduction.runPCA(data);
 	}
 }
