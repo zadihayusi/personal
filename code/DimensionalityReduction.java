@@ -279,7 +279,15 @@ class DimensionalityReduction {
 		return runMDS(fname, DEFAULT_NUM_OF_COMPONENTS);
 	}
 	public static Vector[] runMDS(final Vector[] data, int num_of_components) throws IOException {
-		return cMDS(getEuclideanDistance(data), num_of_components);
+		final int N = data.length;
+		final int D = data[0].dimension();
+		for(int i = 0; i < N; i++)
+			if(data[i].dimension() != D) {
+				System.err.println("DATA INVALID");
+				return null;
+			}
+		final Vector[] std_data = standardize(data);
+		return cMDS(getEuclideanDistance(std_data), num_of_components);
 	}
 	public static Vector[] runMDS(final Vector[] data) throws IOException {
 		return runMDS(data, DEFAULT_NUM_OF_COMPONENTS);
@@ -293,7 +301,14 @@ class DimensionalityReduction {
 	}
 	public static Vector[] isomap(final Vector[] data, int num_of_components) throws IOException {
 		final int N = data.length;
-		final Matrix EuclideanDistance = getEuclideanDistance(data);
+		final int D = data[0].dimension();
+		for(int i = 0; i < N; i++)
+			if(data[i].dimension() != D) {
+				System.err.println("DATA INVALID");
+				return null;
+			}
+		final Vector[] std_data = standardize(data);
+		final Matrix EuclideanDistance = getEuclideanDistance(std_data);
 		final DirectedGraph k_neighbor = new DirectedGraph(N);
 		final int k = 20;
 		for(int i = 0; i < N; i++) {
